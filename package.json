@@ -16,7 +16,7 @@
     "applet-design": "^0.0.30",
     "applet-design-utility": "^0.0.6",
     "applet-shell": "^0.0.21",
-    "applet-store": "^0.0.10",
+    "applet-store": "^0.0.12",
     "applet-types": "^0.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -7,10 +7,12 @@ import PostFormPage from './pages/PostFormPage/PostFormPage'
 import PostsPage from './pages/PostsPage/PostsPage'
 import PostPage from './pages/PostPage/PostPage'
 import { AppletProvider, DefaultLayout, SubPageLayout } from 'applet-shell'
+import TimelinesPage from './pages/TimelinesPage/TimelinesPage'
 
 const menus = [
   { path: '/', label: 'Posts' },
-  { path: '/posts/new', label: 'Create Post' }
+  { path: '/posts/new', label: 'Create Post' },
+  { path: '/timelines', label: 'Timelines' }
 ]
 
 const router = createBrowserRouter(
@@ -20,7 +22,7 @@ const router = createBrowserRouter(
         element={(
           <DefaultLayout
             menus={menus}
-            title={'Career'}/>
+            title={'Timeline'}/>
       )}>
         <Route
           path="/"
@@ -28,6 +30,9 @@ const router = createBrowserRouter(
         <Route
           path="/posts/new"
           element={<PostFormPage />} />
+        <Route
+          path="/timelines"
+          element={<TimelinesPage />} />
       </Route>
       <Route element={<SubPageLayout />}>
         <Route

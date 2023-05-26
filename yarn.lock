@@ -1009,15 +1009,15 @@ anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-applet-apis@^0.0.11:
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/applet-apis/-/applet-apis-0.0.11.tgz#51bf494d03c3118989c19038c69292b07824b13c"
-  integrity sha512-T2QtESZWUd3GUXGKZPnQ9LFUlIDw9/rgvHuGGhsMsrrOSfCZALfaZuCfWowwZtJOxeribNVUrPzvVsrYdgee+Q==
-
 applet-apis@^0.0.13:
   version "0.0.13"
   resolved "https://registry.yarnpkg.com/applet-apis/-/applet-apis-0.0.13.tgz#0d9ad67f597b6c7908edfcb34d2f5430ac362006"
   integrity sha512-39IO63Fba+n0TVDpSRiHZm3DvFTPDybZEK779eNndEdPQvcn2TVpg1eBYyKM49TDB+krjNX2zSpryLLrX8pTzQ==
+
+applet-apis@^0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/applet-apis/-/applet-apis-0.0.14.tgz#e767889370f0627b7b6958b19c010f4416207b0c"
+  integrity sha512-Of2Bv2LPpPH0OyisykktYgLv4R7eFZfaqS3qrlswqZF29zy9I+4NtWtCzR5nXrjplOLIWBFtn/oOR03X6q/Yeg==
 
 applet-design-utility@^0.0.5:
   version "0.0.5"
@@ -1067,25 +1067,20 @@ applet-shell@^0.0.21:
     react-icons "^4.8.0"
     react-router-dom "^6.10.0"
 
-applet-store@^0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/applet-store/-/applet-store-0.0.10.tgz#965f60706c4ef17ee94ab4ad948408a12347fb30"
-  integrity sha512-3H2KsIIyTx+lRLlR6SJ0WLTP3Ky7T/cpEuLbnUObtzSnLS1H0sG57nlgCIL0N7WSlFRbP1n/BJbbC4ULuHtLnQ==
+applet-store@^0.0.12:
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/applet-store/-/applet-store-0.0.12.tgz#a81ce4e6fbccc14a00cee05001a2cae2c0fe7ab9"
+  integrity sha512-8DFxXhbFqDD0hPOXbY5hxClt5zLmmRt3fY7Hy42jzLAMAt/E5NukmNg1awioPiq4IbyMZyWAlSjfHDuWeddccg==
   dependencies:
     "@apollo/client" "^3.7.10"
     "@reduxjs/toolkit" "^1.9.3"
-    applet-apis "^0.0.11"
-    applet-types "^0.0.3"
+    applet-apis "^0.0.14"
+    applet-types "^0.0.4"
     dayjs "^1.11.7"
     graphql "^16.6.0"
     react "^18.2.0"
     react-dom "^18.2.0"
     react-redux "^8.0.5"
-
-applet-types@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/applet-types/-/applet-types-0.0.3.tgz#67b9506f519535e02eb2e9cd655cf4bf3ffe7aec"
-  integrity sha512-eUC+qsbV3zmBXcNt3fS1INwNK20/VgYp1WetmKs0uPBdjTi2uXB7lUA+SyksujjXnqlj6emjb5raWzEjxoZSsg==
 
 applet-types@^0.0.4:
   version "0.0.4"
