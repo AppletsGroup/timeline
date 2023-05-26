@@ -33,33 +33,32 @@ export default function TimelinesPage () {
   const TimelineList = channels.map((channelItem: Channel, idx: number) => {
     return (
       <TimelineItem
-        channel={channelItem}
+        timeline={channelItem}
         key={idx} />
     )
   })
 
   return (
     <div
-      className="bg-gray-100 min-h-screen"
+      className="p-4"
       ref={listRef}>
-      <header className="bg-white shadow-md">
-        <div className="container mx-auto px-4 py-6 flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-gray-800">Timelines</h1>
-          <Link
-            to="/timelines/new"
-            className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded shadow"
-          >
-            Add Timeline
-          </Link>
-        </div>
+      <header className="flex justify-between items-center mb-4 container mx-auto">
+        <h1 className="text-2xl font-bold">Timelines</h1>
+        <Link
+          to="/timelines/new"
+          className="text-blue-500 hover:underline">
+          Add Timeline
+        </Link>
       </header>
-      <main className="container mx-auto py-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
-          {TimelineList}
-        </div>
-        <div className="flex justify-center mt-6">
-          {loadingChannels && hasMoreChannels && <div className="text-gray-600">Loading...</div>}
-          {!hasMoreChannels && <div className="text-gray-600">All Timelines Loaded</div>}
+      <main className="container mx-auto">
+        <div>{TimelineList}</div>
+        <div className="flex justify-center mt-4">
+          {loadingChannels && hasMoreChannels && (
+          <div className="text-gray-500">Loading...</div>
+          )}
+          {!hasMoreChannels && (
+          <div className="text-gray-500">All Timelines Loaded</div>
+          )}
         </div>
       </main>
     </div>

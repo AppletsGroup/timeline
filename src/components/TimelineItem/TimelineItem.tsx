@@ -1,22 +1,21 @@
 import { type Channel } from 'applet-types'
 import { Link } from 'react-router-dom'
 
-export default function ChannelItem ({ channel }: { channel: Channel }) {
+export default function TimelineItem ({ timeline }: { timeline: Channel }) {
   return (
     <Link
-      to={`/timelines/${channel.id}`}
-      className="block bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300"
-    >
-      <div className="relative h-64 overflow-hidden rounded-t-lg">
+      to={`/timelines/${timeline.id}`}
+      className="flex items-center p-4 rounded-lg bg-white shadow hover:shadow-lg mb-4">
+      <div className="mr-4">
         <img
-          className="absolute top-0 left-0 w-full h-full object-cover object-center"
-          src={channel.avatarUrl ?? 'https://assets.yikeguozi.com/public/avatar.png'}
-          alt="Book Cover"
-        />
+          src={timeline.avatarUrl ?? 'https://assets.yikeguozi.com/public/avatar.png'}
+          alt="Timeline Avatar"
+          className="w-16 h-16 object-cover rounded-full"
+    />
       </div>
-      <div className="px-4 py-2">
-        <h2 className="text-xl font-bold text-gray-800 mb-2">{channel.title}</h2>
-        <p className="text-gray-700">{channel.description}</p>
+      <div>
+        <h2 className="text-lg font-bold mb-2">{timeline.title}</h2>
+        <p className="text-gray-500">{timeline.description}</p>
       </div>
     </Link>
   )
