@@ -8,6 +8,7 @@ import PostsPage from './pages/PostsPage/PostsPage'
 import PostPage from './pages/PostPage/PostPage'
 import { AppletProvider, DefaultLayout, SubPageLayout } from 'applet-shell'
 import TimelinesPage from './pages/TimelinesPage/TimelinesPage'
+import TimelinePage from './pages/TimelinePage/TimelinePage'
 
 const menus = [
   { path: '/', label: 'Posts' },
@@ -41,6 +42,9 @@ const router = createBrowserRouter(
         <Route
           path="/posts/:postId/edit"
           element={<PostFormPage />} />
+        <Route
+          path="/timelines/:timelineId"
+          element={<TimelinePage />} />
       </Route>
     </Route>
   )
