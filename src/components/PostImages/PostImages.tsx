@@ -18,10 +18,8 @@ export default function PostImages({ post }: { post: Post }) {
     const imgSourceWidth = imageItem.width
 
     if (imgSourceHeight > imgSourceWidth) {
-      // 图片的展示高度
       imgDisplayHeight =
         imgSourceHeight > imgMaxHeight ? imgMaxHeight : imgSourceHeight
-      // 图片的展示宽度
       imgDisplayWidth =
         (imgSourceWidth * imgDisplayHeight) / imgSourceHeight
 
@@ -29,37 +27,33 @@ export default function PostImages({ post }: { post: Post }) {
         imgDisplayWidth = 100
       }
     } else {
-      // 图片的展示宽度
       imgDisplayWidth =
         imgSourceWidth > imgMaxWidth ? imgMaxWidth : imgSourceWidth
-      // 图片的展示高度
       imgDisplayHeight =
         (imgSourceHeight * imgDisplayWidth) / imgSourceWidth
     }
 
-    ImagesList = (<img
-      src={imageItem.url + '!thumbnail'}
-      style={{ width: imgDisplayWidth, height: imgDisplayHeight }}
-    />)
+    ImagesList = (
+      <img
+        src={imageItem.url + '!thumbnail'}
+        className="w-full h-auto"
+        style={{ maxWidth: imgMaxWidth, maxHeight: imgMaxHeight }}
+      />
+    )
   } else {
+    const gridLayoutClass =
+      images.length === 2 ? 'grid-cols-2' : 'grid-cols-3'
     const ImagesGrid = images.map((imageItem: any, idx: number) => {
       return (
         <img
           src={imageItem.url + '!nine_grids'}
           key={idx}
-      />
+          className={'w-full'}
+        />
       )
     })
-    ImagesList = (
-      <div>
-        {ImagesGrid}
-      </div>
-    )
+    ImagesList = <div className={`grid grid-flow-row gap-1 ${gridLayoutClass}`}>{ImagesGrid}</div>
   }
 
-  return (
-    <div>
-      {ImagesList}
-    </div>
-  )
+  return <div>{ImagesList}</div>
 }

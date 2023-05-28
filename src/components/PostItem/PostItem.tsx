@@ -33,22 +33,25 @@ export default function PostItem({ postItem }: { postItem: Post }) {
 
   return (
     <div>
-      <img
-        src={postItem.author?.avatarUrl}
-        alt="img" />
-      <div>
+      <div className="flex items-center mb-4">
+        <img
+          src={postItem.author?.avatarUrl}
+          alt="img"
+          className="w-12 h-12 rounded-full mr-4"
+      />
         <div>
-          <div>
-            <div>
-              {postItem.author?.name}
-            </div>
-            <div>
-              Created at
-              {' '}
-              {fromNow(postItem.createdAt ?? '')}
-            </div>
+          <div className="font-bold text-lg mb-1">
+            {postItem.author?.name}
+          </div>
+          <div className="text-sm text-gray-500">
+            Created at
+            {' '}
+            {fromNow(postItem.createdAt ?? '')}
           </div>
         </div>
+      </div>
+
+      <div className="ml-auto">
         {buildBody()}
       </div>
     </div>
