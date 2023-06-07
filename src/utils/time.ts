@@ -13,3 +13,10 @@ export function fromNow(date2Format: string) {
 export function isAfter(a: string, b: string) {
   return dayjs(a).isAfter(dayjs(b))
 }
+
+export function getMonthAndDay(dateStr: string) {
+  const date2Format = dayjs(dateStr)
+  const month = date2Format.format('MMM')
+  const day = date2Format.format('DD')
+  return [month, day]
+}

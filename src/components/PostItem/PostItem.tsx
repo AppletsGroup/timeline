@@ -1,6 +1,6 @@
 
 import { type Post } from 'applet-types'
-import { fromNow } from '../../utils/time'
+import { getMonthAndDay } from '../../utils/time'
 import ImagesWithText from '../ContentTypes/ImagesWithText'
 import DefaultPost from '../ContentTypes/DefaultPost'
 import { Link } from 'react-router-dom'
@@ -32,14 +32,19 @@ export default function PostItem({ postItem }: { postItem: Post }) {
     }
   }
 
+  const [month, day] = getMonthAndDay(postItem.createdAt ?? '')
+
   return (
     <Link
       to={`/posts/${postItem.id}`}
       className="flex items-start mb-4">
-      <div className="text-sm text-gray-500">
-        Created at
-        {' '}
-        {fromNow(postItem.createdAt ?? '')}
+      <div className="flex items-end mr-6">
+        <div className="text-2xl bold">
+          {day}
+        </div>
+        <div className="text-base text-gray-500 ml-1">
+          {month}
+        </div>
       </div>
 
       <div className="ml-2">
