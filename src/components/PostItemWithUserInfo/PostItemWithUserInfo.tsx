@@ -33,16 +33,21 @@ export default function PostItem({ postItem }: { postItem: Post }) {
   }
 
   return (
-    <Link
-      to={`/posts/${postItem.id}`}
-      className="flex items-start mb-4">
-      <div className="text-sm text-gray-500">
-        Created at
-        {' '}
-        {fromNow(postItem.createdAt ?? '')}
+    <Link to={`/posts/${postItem.id}`}>
+      <div className="flex items-center mb-4">
+        <div>
+          <div className="font-bold text-lg mb-1">
+            {postItem.author?.name}
+          </div>
+          <div className="text-sm text-gray-500">
+            Created at
+            {' '}
+            {fromNow(postItem.createdAt ?? '')}
+          </div>
+        </div>
       </div>
 
-      <div className="ml-2">
+      <div className="ml-auto">
         {buildBody()}
       </div>
     </Link>

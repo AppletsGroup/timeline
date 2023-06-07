@@ -4,7 +4,7 @@ import { appletStore } from 'applet-store'
 import { Provider } from 'react-redux'
 
 import PostFormPage from './pages/PostFormPage/PostFormPage'
-import PostsPage from './pages/PostsPage/PostsPage'
+import MyPostsPage from './pages/MyPostsPage/MyPostsPage'
 import PostPage from './pages/PostPage/PostPage'
 import { AppletProvider, DefaultLayout, SubPageLayout } from 'applet-shell'
 import TimelinesPage from './pages/TimelinesPage/TimelinesPage'
@@ -12,7 +12,7 @@ import TimelinePage from './pages/TimelinePage/TimelinePage'
 
 const menus = [
   { path: '/', label: 'Posts' },
-  { path: '/posts/new', label: 'Create Post' },
+  { path: '/subscribe', label: 'Subscribe' },
   { path: '/timelines', label: 'Timelines' }
 ]
 
@@ -27,7 +27,10 @@ const router = createBrowserRouter(
       )}>
         <Route
           path="/"
-          element={<PostsPage />} />
+          element={<MyPostsPage />} />
+        <Route
+          path="/subsribe"
+          element={<MyPostsPage />} />
         <Route
           path="/posts/new"
           element={<PostFormPage />} />

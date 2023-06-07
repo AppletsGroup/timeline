@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import { useAppDispatch, useAppSelector, post } from 'applet-store'
 import { useReachBottom } from 'use-reach-bottom'
-const { setCurrentPage, loadPosts } = post
+import PostItem from '../../components/PostItem/PostItem'
+const { setCurrentPage, loadPosts, setContentTypes } = post
 
 const ResumesPage = () => {
   const listRef = useRef(null)
@@ -10,6 +11,7 @@ const ResumesPage = () => {
 
   useEffect(() => {
     const initData = (): void => {
+      dispatch(setContentTypes(['IMAGES_WITH_TEXT']))
       void dispatch(loadPosts())
     }
     if (posts === null || posts.length === 0) initData()
@@ -25,10 +27,12 @@ const ResumesPage = () => {
   return (
     <div className="bg-white min-h-screen">
       <div className="max-w-7xl mx-auto py-5 sm:px-6 lg:px-8 px-4">
-        <h2 className="text-3xl font-extrabold text-blue-500">Posts</h2>
-        <div className="mt-8 grid gap-8 lg:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1">
+        <h2 className="text-3xl font-extrabold text-blue-500">My Posts</h2>
+        <div className="mt-8">
           {posts.map((post) => (
-            <div key={post.id}>{post.id}</div>
+            <PostItem
+              postItem={post}
+              key={post.id} />
           ))}
         </div>
       </div>
