@@ -1,4 +1,4 @@
-import { createPost } from 'applet-apis'
+import { createPost, updateAttachment } from 'applet-apis'
 import { Button, FieldError, Form, Label, TextAreaField } from 'applet-design'
 import { useEffect, useState } from 'react'
 import ChannelsCombobox from '../../components/ChannelsCombobox/ChannelsCombobox'
@@ -112,12 +112,6 @@ const PostFormPage = () => {
   }
 
   const onImagesChange = (selectedFiles: File[]) => {
-    // // const { onChange } = this.props;
-    // console.log('Aliyun OSS:', fileList)
-    // // if (onChange) {
-    // //   onChange([...fileList]);
-    // // }
-    // const doneFiles = fileList.filter(fileItem => fileItem.status === 'done')
     setFiles(selectedFiles)
   }
 

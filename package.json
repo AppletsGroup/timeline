@@ -12,7 +12,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "applet-apis": "^0.0.13",
+    "applet-apis": "^0.0.15",
     "applet-design": "^0.0.30",
     "applet-design-utility": "^0.0.6",
     "applet-shell": "^0.0.21",

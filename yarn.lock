@@ -1019,6 +1019,11 @@ applet-apis@^0.0.14:
   resolved "https://registry.yarnpkg.com/applet-apis/-/applet-apis-0.0.14.tgz#e767889370f0627b7b6958b19c010f4416207b0c"
   integrity sha512-Of2Bv2LPpPH0OyisykktYgLv4R7eFZfaqS3qrlswqZF29zy9I+4NtWtCzR5nXrjplOLIWBFtn/oOR03X6q/Yeg==
 
+applet-apis@^0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/applet-apis/-/applet-apis-0.0.15.tgz#0ec0ecfb93f259718c1a349bd131a0c11deca2a8"
+  integrity sha512-eqef/8e8FlTLLeXriRdVR/lITyRYk6dnGjI3xbRwSzv9W0xFW0dalOcRIwCRmuPxtOxCDH0uTMlbxKNvMl1YnQ==
+
 applet-design-utility@^0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/applet-design-utility/-/applet-design-utility-0.0.5.tgz#06092eff04d22b82fcce0af388160bd74595a0d5"
