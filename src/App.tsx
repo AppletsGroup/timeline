@@ -9,8 +9,10 @@ import PostPage from './pages/PostPage/PostPage'
 import { AppletProvider, DefaultLayout, SubPageLayout } from 'applet-shell'
 import TimelinesPage from './pages/TimelinesPage/TimelinesPage'
 import TimelinePage from './pages/TimelinePage/TimelinePage'
+import SubscribePostsPage from './pages/SubscribePostsPage/SubscribePostsPage'
 
 const menus = [
+  { path: '/posts/new', label: 'Add Post' },
   { path: '/', label: 'Posts' },
   { path: '/subscribe', label: 'Subscribe' },
   { path: '/timelines', label: 'Timelines' }
@@ -29,16 +31,16 @@ const router = createBrowserRouter(
           path="/"
           element={<MyPostsPage />} />
         <Route
-          path="/subsribe"
-          element={<MyPostsPage />} />
-        <Route
-          path="/posts/new"
-          element={<PostFormPage />} />
+          path="/subscribe"
+          element={<SubscribePostsPage />} />
         <Route
           path="/timelines"
           element={<TimelinesPage />} />
       </Route>
       <Route element={<SubPageLayout />}>
+        <Route
+          path="/posts/new"
+          element={<PostFormPage />} />
         <Route
           path="/posts/:postId"
           element={<PostPage />} />

@@ -3,9 +3,11 @@ import { type Post } from 'applet-types'
 import { getMonthAndDay } from '../../utils/time'
 import ImagesWithText from '../ContentTypes/ImagesWithText'
 import DefaultPost from '../ContentTypes/DefaultPost'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function PostItem({ postItem }: { postItem: Post }) {
+  const navigate = useNavigate()
+
   const buildBody = () => {
     const { contentType } = postItem
 
@@ -32,12 +34,26 @@ export default function PostItem({ postItem }: { postItem: Post }) {
     }
   }
 
+  const buildChannel = () => {
+    return (
+      <Link
+        to={`/timelines/${postItem.channel?.id}`}
+        className="bg-slate-100 px-3 py-1 rounded text-sm text-slate-600">
+        {postItem.channel?.title}
+      </Link>
+    )
+  }
+
+  const handleGotoPostDetail = () => {
+    navigate(`/posts/${postItem.id}`)
+  }
+
   const [month, day] = getMonthAndDay(postItem.createdAt ?? '')
 
   return (
-    <Link
-      to={`/posts/${postItem.id}`}
-      className="flex items-start mb-4">
+    <div
+      onClick={handleGotoPostDetail}
+      className="flex items-start mt-4">
       <div className="flex items-end mr-6">
         <div className="text-2xl bold">
           {day}
@@ -49,7 +65,8 @@ export default function PostItem({ postItem }: { postItem: Post }) {
 
       <div className="ml-2">
         {buildBody()}
+        {postItem.channel && buildChannel()}
       </div>
-    </Link>
+    </div>
   )
 }
