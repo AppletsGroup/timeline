@@ -112,7 +112,8 @@ const PostFormPage = () => {
 
       let newPost
 
-      const blocks2Create = [
+      // TODO: add block types
+      const blocks2Create: any = [
         {
           content: { text: contentText },
           contentType: 'Text'
