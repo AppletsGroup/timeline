@@ -5,7 +5,7 @@ export default function PostContent({ postItem }: { postItem: Post }) {
   const textContent = getPostTextContent(postItem)
 
   return (
-    <div>
+    <div className="text-stone-600 text-base">
       {textContent}
     </div>
   )

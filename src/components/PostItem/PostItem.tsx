@@ -1,11 +1,11 @@
 
 import { type Post } from 'applet-types'
-import { getMonthAndDay } from '../../utils/time'
+import { getDateMetaData } from '../../utils/time'
 import ImagesWithText from '../ContentTypes/ImagesWithText'
 import DefaultPost from '../ContentTypes/DefaultPost'
 import { Link, useNavigate } from 'react-router-dom'
 
-export default function PostItem({ postItem }: { postItem: Post }) {
+export default function PostItem({ postItem, index }: { postItem: Post, index: number }) {
   const navigate = useNavigate()
 
   const buildBody = () => {
@@ -38,8 +38,8 @@ export default function PostItem({ postItem }: { postItem: Post }) {
     return (
       <Link
         to={`/timelines/${postItem.channel?.id}`}
-        className="bg-slate-100 px-3 py-1 rounded text-sm text-slate-600">
-        {postItem.channel?.title}
+        onClick={(event) => { event.stopPropagation() }}>
+        <div className="bg-slate-100 px-3 py-1 rounded text-sm text-slate-600 mt-2 inline-block">{postItem.channel?.title}</div>
       </Link>
     )
   }
@@ -48,24 +48,30 @@ export default function PostItem({ postItem }: { postItem: Post }) {
     navigate(`/posts/${postItem.id}`)
   }
 
-  const [month, day] = getMonthAndDay(postItem.createdAt ?? '')
+  const { day, weekDay, hourAndMinute } = getDateMetaData(postItem.createdAt ?? '')
 
   return (
     <div
       onClick={handleGotoPostDetail}
-      className="flex items-start mt-4">
-      <div className="flex items-end mr-6">
-        <div className="text-2xl bold">
-          {day}
-        </div>
-        <div className="text-base text-gray-500 ml-1">
-          {month}
-        </div>
-      </div>
+      className="flex justify-between items-start mt-4 border-b px-4 pb-2">
 
-      <div className="ml-2">
+      <div className="mr-2">
         {buildBody()}
         {postItem.channel && buildChannel()}
+      </div>
+      <div className="flex flex-col items-center justify-center ml-6 h-full">
+        {
+          index === 0 &&
+            (
+              <div className="border rounded-lg flex flex-col items-center justify-center px-1 shadow-md">
+                <div className="text-sm text-stone-400">{weekDay}</div>
+                <div className="text-xl bold">{day}</div>
+              </div>
+            )
+        }
+        <div className="text-sm text-gray-500">
+          {hourAndMinute}
+        </div>
       </div>
     </div>
   )

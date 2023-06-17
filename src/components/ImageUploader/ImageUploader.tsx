@@ -10,8 +10,10 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onChange }) => {
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files ?? [])
-    setSelectedFiles((prevFiles) => [...prevFiles, ...files])
+    const updatedFiles = [...selectedFiles, ...files]
+    setSelectedFiles(updatedFiles)
     event.target.value = ''
+    onChange(updatedFiles)
   }
 
   const handleButtonClick = () => {
@@ -19,7 +21,9 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onChange }) => {
   }
 
   const handleRemoveImage = (file: File) => {
-    setSelectedFiles((prevFiles) => prevFiles.filter((f) => f !== file))
+    const updatedFiles = selectedFiles.filter((f) => f !== file)
+    setSelectedFiles(updatedFiles)
+    onChange(updatedFiles)
   }
 
   return (

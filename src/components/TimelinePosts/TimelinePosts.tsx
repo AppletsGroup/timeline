@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { channel, useAppDispatch, useAppSelector } from 'applet-store'
 import { type Post } from 'applet-types'
-import PostItem from '../PostItem/PostItem'
+import PostItemWithUserInfo from '../PostItemWithUserInfo/PostItemWithUserInfo'
 
 const { loadChannelPosts, setPostPage, setChannelId } = channel
 
@@ -24,7 +24,7 @@ export default function TimelinePosts({ bookId }: {
   const PostList = channelPosts && channelPosts.length > 0
     ? channelPosts.map((item: Post, idx: number) => {
       return (
-        <PostItem
+        <PostItemWithUserInfo
           postItem={item}
           key={idx} />
       )

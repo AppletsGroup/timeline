@@ -1,8 +1,19 @@
 import { type Post } from 'applet-types'
 import { getPostImages } from '../../utils/post'
+import { useState } from 'react'
+import ImageViewer from '../ImageViewer/ImageViewer'
 
 export default function PostImages({ post }: { post: Post }) {
+  const [isOpenViewer, setIsOpenViewer] = useState(false)
+  const [imageUrls, setImageUrls] = useState<string[]>([])
+  const [imageIdx, setImageIdx] = useState<number>(0)
   const images = getPostImages(post)
+
+  const handleViewImage = (idx: number) => {
+    setIsOpenViewer(true)
+    setImageIdx(idx)
+    setImageUrls(images.map((img: any) => img.url))
+  }
 
   let ImagesList
 
@@ -36,8 +47,9 @@ export default function PostImages({ post }: { post: Post }) {
     ImagesList = (
       <img
         src={imageItem.url + '!thumbnail'}
-        className="w-full h-auto"
+        className="w-full h-auto rounded-md"
         style={{ maxWidth: imgMaxWidth, maxHeight: imgMaxHeight }}
+        onClick={() => { handleViewImage(0) }}
       />
     )
   } else {
@@ -48,12 +60,22 @@ export default function PostImages({ post }: { post: Post }) {
         <img
           src={imageItem.url + '!nine_grids'}
           key={idx}
-          className={'w-full'}
+          className='w-full rounded'
+          onClick={() => { handleViewImage(idx) }}
         />
       )
     })
     ImagesList = <div className={`grid grid-flow-row gap-1 ${gridLayoutClass}`}>{ImagesGrid}</div>
   }
 
-  return <div>{ImagesList}</div>
+  return (
+    <>
+      <div className="mt-1">{ImagesList}</div>
+      <ImageViewer
+        visible={isOpenViewer}
+        imageUrls={imageUrls}
+        defaultIndex={imageIdx}
+        onClose={() => { setIsOpenViewer(false) }}></ImageViewer>
+    </>
+  )
 }

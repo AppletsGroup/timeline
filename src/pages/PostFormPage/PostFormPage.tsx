@@ -1,4 +1,4 @@
-import { createPost, updateAttachment } from 'applet-apis'
+import { createAttachment, createPost, updateAttachment } from 'applet-apis'
 import { Button, FieldError, Form, Label, TextAreaField } from 'applet-design'
 import { useEffect, useState } from 'react'
 import ChannelsCombobox from '../../components/ChannelsCombobox/ChannelsCombobox'
@@ -7,9 +7,66 @@ import { useApplet } from 'applet-shell'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, channel, post } from 'applet-store'
 import ImageUploader from '../../components/ImageUploader/ImageUploader'
+import axios from 'axios'
 
 const { channelPostAdded } = channel
 const { postAdded } = post
+
+interface ImageMeta {
+  width: number
+  height: number
+}
+const getFileMeta = async (file: File) => {
+  const reader = new FileReader()
+  reader.readAsDataURL(file)
+
+  return await new Promise((resolve, reject) => {
+    reader.addEventListener('load', event => {
+      const _loadedImageUrl = event.target?.result
+      const image = document.createElement('img')
+      if (_loadedImageUrl != null) {
+        // eslint-disable-next-line @typescript-eslint/no-base-to-string
+        image.src = _loadedImageUrl.toString()
+        image.addEventListener('load', async () => {
+          const { width, height } = image
+
+          resolve({
+            width,
+            height
+          })
+        })
+      } else {
+        // eslint-disable-next-line prefer-promise-reject-errors
+        reject()
+      }
+    })
+  })
+}
+
+const uploadImage = async (file: File) => {
+  const filename = file.name
+  const attachmentData = await createAttachment(filename)
+  const formParams = JSON.parse(attachmentData.uploadInfo.formParams)
+  const formData = new FormData()
+  formData.append('Signature', formParams.Signature)
+  formData.append('policy', formParams.policy)
+  formData.append('key', formParams.key)
+  formData.append('OSSAccessKeyId', formParams.OSSAccessKeyId)
+  formData.append('contentType', 'multipart/form-data')
+  formData.append('success_action_status', '200')
+  formData.append('file', file)
+
+  await axios({
+    method: 'post',
+    url: attachmentData.uploadInfo.host,
+    data: formData,
+    headers: { 'Content-Type': 'multipart/form-data' }
+  })
+
+  const updateAttachmentRes = await updateAttachment(attachmentData.id, 'UPLOADED')
+
+  return updateAttachmentRes.url
+}
 
 const PostFormPage = () => {
   const applet = useApplet()
@@ -17,7 +74,7 @@ const PostFormPage = () => {
   const dispatch = useAppDispatch()
 
   const [creating, setCreating] = useState(false)
-  const [files, setFiles] = useState<any>([])
+  const [files, setFiles] = useState<File[]>([])
   const [selectedChannel, setSelectedChannel] = useState<null | {
     title: string
     id: number
@@ -41,12 +98,13 @@ const PostFormPage = () => {
 
     try {
       setCreating(true)
-      const imgFiles: any = []
+      const imgFiles = []
       if (files.length > 0) {
         for (let i = 0, len = files.length; i < len; i++) {
           const fileItem = files[i]
-          await updateAttachment(fileItem.attachmentId, 'UPLOADED')
-          imgFiles.push({ url: fileItem.url, width: fileItem.width, height: fileItem.height })
+          const imageUrl = await uploadImage(fileItem)
+          const imageMeta = await getFileMeta(fileItem) as ImageMeta
+          imgFiles.push({ url: imageUrl, width: imageMeta.width, height: imageMeta.height })
         }
       }
 
@@ -106,12 +164,13 @@ const PostFormPage = () => {
     }
   }
 
-  const handleBack = (e: any) => {
+  const handleBack = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     navigate(-1)
   }
 
   const onImagesChange = (selectedFiles: File[]) => {
+    console.log(selectedFiles)
     setFiles(selectedFiles)
   }
 
